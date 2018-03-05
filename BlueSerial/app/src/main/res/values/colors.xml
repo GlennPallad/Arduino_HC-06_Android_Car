@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorClouds">#ecf0f1</color>
+    <color name="colorWetAsphalt">#34495e</color>
+    <color name="colorAlizarin">#e74c3c</color>
+    <color name="colorAsbestos">#7f8c8d</color>
+</resources>

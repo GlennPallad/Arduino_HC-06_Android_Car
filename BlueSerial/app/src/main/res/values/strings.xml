@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">BlueSerial</string>
+
+    <!-- activity_main -->
+    <string name="divice_list">Divice list</string>
+    <string name="title_activity_control">ControlActivity</string>
+
+    <!-- activity_control -->
+    <string name="status">Status</string>
+    <string name="forward">D</string>
+    <string name="back">R</string>
+    <string name="stop">P</string>
+    <string name="left">Left</string>
+    <string name="right">Right</string>
+    <string name="disconnect">DISCONNECT</string>
+    <string name="speed_1">1</string>
+    <string name="speed_2">2</string>
+    <string name="speed_3">3</string>
+
+</resources>
