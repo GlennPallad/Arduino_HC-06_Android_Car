@@ -3,7 +3,7 @@
 
 ### zh_CN
 ##### APK 安装包位置
-BlueSerial\app\build\outputs\apk\debug\app-debug.apk
+Compiled APK\app-debug.apk
 ##### 结构图和接线图
 * 结构图<br/>
 ![结构图](https://raw.githubusercontent.com/GlennPallad/Arduino_HC-06_Android_Car/master/README_pictures/frame.png)
@@ -38,7 +38,7 @@ BlueSerial\app\build\outputs\apk\debug\app-debug.apk
 
 ### en_US
 ##### APK path
-BlueSerial\app\build\outputs\apk\debug\app-debug.apk
+Compiled APK\app-debug.apk
 ##### Frame and hookup
 * Frame<br/>
 ![Frame](https://raw.githubusercontent.com/GlennPallad/Arduino_HC-06_Android_Car/master/README_pictures/frame.png)
