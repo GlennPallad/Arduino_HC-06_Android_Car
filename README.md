@@ -55,10 +55,10 @@ Input voltage: 9V<br/>
 For motor control, PWM supported.
 
 * HC-06<br/>
-For communicate with Android.
+For communicating with Android.
 
 * HC-SR04<br/>
-Supersonic distance measurement, placed in head of car, for anti-collision.<br/>
+Supersonic distance measurement, placed in front of car, for anti-collision.<br/>
 Configured to stop the car when distance between the car and obstacles less then 30cm via software.
 
 ##### Android App UI description
@@ -67,5 +67,5 @@ Buttons<br/>
 `1`<br/>
 `2`<br/>
 `3`<br/>
-on the left side are used for motor speed control.<br/>
+on the left side are used for motor speed controlling.<br/>
 ![App UI](https://raw.githubusercontent.com/GlennPallad/Arduino_HC-06_Android_Car/master/README_pictures/APP%20UI.png)
