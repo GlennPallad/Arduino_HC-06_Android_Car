@@ -1,5 +1,7 @@
 
-[TOC]
+* [zh_CN](#zh_cn)
+* [en_US](#en_us)
+
 
 ### zh_CN
 ##### APK 安装包位置
