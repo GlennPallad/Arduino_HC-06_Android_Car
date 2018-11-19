@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".ModeActivity">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		android:background="@color/colorClouds">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1">
+		</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:orientation="vertical"
+            android:gravity="center">
+            <Button
+                android:id="@+id/buttonTracking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorElectromagnetic"
+                android:textColor="@color/colorClouds"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"
+                android:text="@string/tracking"/>
+            <Button
+                android:id="@+id/buttonAvoidance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorElectromagnetic"
+                android:textColor="@color/colorClouds"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"
+                android:text="@string/avoidance"/>
+            <Button
+                android:id="@+id/buttonFree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorElectromagnetic"
+                android:textColor="@color/colorClouds"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"
+                android:text="@string/free"/>
+
+        </LinearLayout>
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1">
+		</LinearLayout>
+	</LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

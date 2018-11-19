@@ -1,0 +1,17 @@
+<resources>
+	<string name="app_name">BW BOGIE</string>
+
+	<!-- activity_main -->
+	<string name="divice_list">Divice list</string>
+
+	<!-- activity_mode -->
+	<string name="tracking">Tracking</string>
+	<string name="avoidance">Avoidance</string>
+	<string name="free">Free</string>
+	<string name="disconnect">DISCONNECT</string>
+
+	<!-- 3 modes activities -->
+	<string name="status">STATUS</string>
+	<string name="start">START</string>
+	<string name="stop">STOP</string>
+</resources>
