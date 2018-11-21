@@ -4,7 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".TrackingActivity">
+	tools:context=".AvoidanceActivity">
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -23,7 +23,7 @@
 			android:orientation="vertical"
 			android:gravity="center">
 			<Button
-				android:id="@+id/buttonTrackingStart"
+				android:id="@+id/buttonAvoidanceStart"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:background="@color/colorGreenSea"
@@ -35,7 +35,7 @@
 				android:text="@string/start"/>
 
 			<Button
-				android:id="@+id/buttonTrackingStop"
+				android:id="@+id/buttonAvoidanceStop"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:background="@color/colorPomegranate"
@@ -53,7 +53,7 @@
 			android:orientation="vertical"
 			android:gravity="center">
 			<Button
-				android:id="@+id/buttonTrackingDisconnect"
+				android:id="@+id/buttonAvoidanceDisconnect"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:background="@color/colorMidnightBlue"
@@ -65,5 +65,4 @@
 				android:text="@string/disconnect"/>
 		</LinearLayout>
 	</LinearLayout>
-
 </android.support.constraint.ConstraintLayout>

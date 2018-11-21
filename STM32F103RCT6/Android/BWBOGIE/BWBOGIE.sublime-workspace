@@ -523,7 +523,7 @@
 			"file": "app/src/main/java/com/bitwitcher/bwbogie/MainActivity.java",
 			"settings":
 			{
-				"buffer_size": 2297,
+				"buffer_size": 2312,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -532,7 +532,16 @@
 			"file": "app/src/main/java/com/bitwitcher/bwbogie/ModeActivity.java",
 			"settings":
 			{
-				"buffer_size": 6373,
+				"buffer_size": 1608,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/src/main/java/com/bitwitcher/bwbogie/TrackingActivity.java",
+			"settings":
+			{
+				"buffer_size": 6372,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -611,9 +620,9 @@
 	"file_history":
 	[
 		"/D/Data/Proj_Android/REPO-BOGIE/STM32F103RCT6/Android/BWBOGIE/app/src/main/res/values/strings.xml",
+		"/D/Data/Proj_Android/REPO-BOGIE/STM32F103RCT6/Android/BWBOGIE/app/src/main/res/values/colors.xml",
 		"/D/Data/Proj_Android/REPO-BOGIE/STM32F103RCT6/Android/BWBOGIE/app/src/main/res/layout/activity_mode.xml",
 		"/D/Data/Proj_Android/REPO-BOGIE/STM32F103RCT6/Android/BWBOGIE/app/src/main/res/layout/activity_main.xml",
-		"/D/Data/Proj_Android/REPO-BOGIE/STM32F103RCT6/Android/BWBOGIE/app/src/main/res/values/colors.xml",
 		"/D/Data/Proj_Android/REPO-BOGIE/STM32F103RCT6/Android/BWBOGIE/app/src/main/AndroidManifest.xml",
 		"/D/Data/Drone-DIYer-Test/protocol.md",
 		"/C/Users/Glenn/Desktop/temp.md",
@@ -741,7 +750,7 @@
 	],
 	"find":
 	{
-		"height": 59.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
@@ -755,6 +764,32 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"i",
+			"MainActivity.",
+			"newInt",
+			"i",
+			"I",
+			"i",
+			"I",
+			"i",
+			"address",
+			"newInt",
+			"ModeActivity",
+			"btn",
+			"Disc",
+			"btn",
+			"colorElectromagnetic",
+			"colorPomegranate",
+			"colorGreenSea",
+			"stop",
+			"status",
+			"tracking",
+			"avoidance",
+			"avoidence",
+			"tracking",
+			"disconnect",
+			"ac",
+			"activity_mode",
 			"}\n",
 			"ControlActivity",
 			"setOnClickListener",
@@ -767,20 +802,21 @@
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": true,
+		"regex": false,
 		"replace_history":
 		[
+			"TrackingActivity"
 		],
 		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
-		"whole_word": false,
+		"whole_word": true,
 		"wrap": false
 	},
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -789,15 +825,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2297,
+						"buffer_size": 2312,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1241,
-								1241
+								444,
+								444
 							]
 						],
 						"settings":
@@ -806,10 +842,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 532.0,
+						"translation.y": 324.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -818,15 +854,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6373,
+						"buffer_size": 1608,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								294,
-								294
+								928,
+								928
 							]
 						],
 						"settings":
@@ -834,10 +870,38 @@
 							"syntax": "Packages/Java/Java.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 108.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/src/main/java/com/bitwitcher/bwbogie/TrackingActivity.java",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6372,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5650,
+								5650
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Java/Java.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 2958.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -845,7 +909,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 28.0
+		"height": 27.0
 	},
 	"input":
 	{
@@ -886,7 +950,7 @@
 	"project": "BWBOGIE.sublime-project",
 	"replace":
 	{
-		"height": 52.0
+		"height": 72.0
 	},
 	"save_all_on_build": true,
 	"select_file":

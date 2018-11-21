@@ -21,15 +21,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
 
-public class TrackingActivity extends Activity {
+public class AvoidanceActivity extends Activity {
 
 	static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
 	private ProgressDialog progressDialog;
 	private boolean isBtConnected = false;
 	private ReceiveMessageThread mReceiveMessageThread;
-	
-	Button btnTrackingStart, btnTrackingStop, btnTrackingDisconnect;
+
+	Button btnAvoidanceStart, btnAvoidanceStop, btnAvoidanceDisconnect;
 	String address = null;
 	TextView textViewStatus;
 	BluetoothAdapter myBluetoothAdapter = null;
@@ -41,7 +41,7 @@ public class TrackingActivity extends Activity {
 
 		@Override
 		protected  void onPreExecute () {
-			progressDialog = ProgressDialog.show(TrackingActivity.this, "Connecting...", "Please Wait!!!");
+			progressDialog = ProgressDialog.show(AvoidanceActivity.this, "Connecting...", "Please Wait!!!");
 		}
 
 		@Override
@@ -71,7 +71,7 @@ public class TrackingActivity extends Activity {
 				msg("Connected");
 				isBtConnected = true;
 				/* Initializing to stop. */
-				sendSignal(Protocol.T_STOP);
+				sendSignal(Protocol.A_STOP);
 				/* Start a new Thread, reading from HC-0x. */
 				mReceiveMessageThread = new ReceiveMessageThread(btSocket);
 				mReceiveMessageThread.start();
@@ -94,14 +94,14 @@ public class TrackingActivity extends Activity {
 				inputStream = btSocket.getInputStream();
 				// inputStreamReader = new InputStreamReader(inputStream);
 			} catch (IOException e) {
-				Log.d("TrackingActivity: ","Something's wrong when encapsulating InputStream.");
+				Log.d("AvoidanceActivity: ","Something's wrong when encapsulating InputStream.");
 				e.printStackTrace();
 			}
 		}
 
 		@Override
 		public void run() {
-			Log.d("TrackingActivity: ", "mReceiveMessageThread started!");
+			Log.d("AvoidanceActivity: ", "mReceiveMessageThread started!");
 			/* buffer for inputStream */
 			byte buffer[] = new byte[256];
 			int buffLength;
@@ -110,7 +110,7 @@ public class TrackingActivity extends Activity {
 			while (this.threadStatus == RUN) {
 				try {
 					if (inputStream.available() > 0) {
-						/* Wait until all bytes are received from HC-0x, you can modify 50 to larger number */					
+						/* Wait until all bytes are received from HC-0x, you can modify 50 to larger number */
 						/* to receive a longer bytes array. */
 						Thread.sleep(50);
 						/* Read from the InputStream */
@@ -124,13 +124,13 @@ public class TrackingActivity extends Activity {
 						}
 					}
 				} catch (IOException e) {
-					Log.d("TrackingActivity: ", "mReceiveMessageThread encountered IOException!");
+					Log.d("AvoidanceActivity: ", "mReceiveMessageThread encountered IOException!");
 					e.printStackTrace();
 					threadStatus = KILL;
 					/* break is not necessary here but for better syntax accordance it was wrote. */
 					break;
 				} catch (InterruptedException e) {
-					Log.d("TrackingActivity: ", "mReceiveMessageThread encountered InterruptedException!");
+					Log.d("AvoidanceActivity: ", "mReceiveMessageThread encountered InterruptedException!");
 					e.printStackTrace();
 					threadStatus = KILL;
 					break;
@@ -148,14 +148,14 @@ public class TrackingActivity extends Activity {
 			for (int i = 0; i < buffLength; i++) {
 				c_buffer[i] = (char)(b_buffer[i] & 0xFF);
 			}
-			Log.d("TrackingActivity: ", "HC-0x said: " + new String(c_buffer, 0, msg.arg1));
+			Log.d("AvoidanceActivity: ", "HC-0x said: " + new String(c_buffer, 0, msg.arg1));
 		}
 	};
 
 	private void msg (String s) {
 		Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
 	}
-	
+
 	private void sendSignal ( String cmd ) {
 		if ( btSocket != null ) {
 			try {
@@ -177,16 +177,16 @@ public class TrackingActivity extends Activity {
 		if ( btSocket != null ) {
 			try {
 				mReceiveMessageThread.killThread();
-				Log.d("TrackingActivity: ", "Thread killed.");
+				Log.d("AvoidanceActivity: ", "Thread killed.");
 				/* Stop before disconnect. */
-				sendSignal(Protocol.T_STOP);
+				sendSignal(Protocol.A_STOP);
 				/* inputStreamReader automatically close when inputStream closed. */
 				inputStream.close();
-				Log.d("TrackingActivity: ", "inputStream closed.");
+				Log.d("AvoidanceActivity: ", "inputStream closed.");
 				btSocket.close();
-				Log.d("TrackingActivity: ", "btSocket closed.");
+				Log.d("AvoidanceActivity: ", "btSocket closed.");
 			} catch(IOException e) {
-				Log.d("TrackingActivity: ", "Close Error.");
+				Log.d("AvoidanceActivity: ", "Close Error.");
 				msg("Disconnect() Error");
 			}
 		}
@@ -196,29 +196,29 @@ public class TrackingActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_tracking);
-		
+		setContentView(R.layout.activity_avoidance);
+
 		Intent intent = getIntent();
 		address = intent.getStringExtra(ModeActivity.EXTRA_ADDRESS);
-		
+
 		new ConnectBT().execute();
 
-		btnTrackingStart = findViewById(R.id.buttonTrackingStart);
-		btnTrackingStop = findViewById(R.id.buttonTrackingStop);
-		btnTrackingDisconnect = findViewById(R.id.buttonTrackingDisconnect);
-		btnTrackingStart.setOnClickListener(new View.OnClickListener() {
+		btnAvoidanceStart = findViewById(R.id.buttonAvoidanceStart);
+		btnAvoidanceStop = findViewById(R.id.buttonAvoidanceStop);
+		btnAvoidanceDisconnect = findViewById(R.id.buttonAvoidanceDisconnect);
+		btnAvoidanceStart.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				sendSignal(Protocol.T_STAR);
+				sendSignal(Protocol.A_STAR);
 			}
 		});
-		btnTrackingStop.setOnClickListener(new View.OnClickListener() {
+		btnAvoidanceStop.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				sendSignal(Protocol.T_STOP);
+				sendSignal(Protocol.A_STOP);
 			}
 		});
-		btnTrackingDisconnect.setOnClickListener(new View.OnClickListener() {
+		btnAvoidanceDisconnect.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Disconnect();

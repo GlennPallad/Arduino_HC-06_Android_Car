@@ -19,29 +19,32 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.util.UUID;
 
-public class TrackingActivity extends Activity {
+public class FreeActivity extends Activity {
 
 	static final UUID myUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
 	private ProgressDialog progressDialog;
 	private boolean isBtConnected = false;
 	private ReceiveMessageThread mReceiveMessageThread;
-	
-	Button btnTrackingStart, btnTrackingStop, btnTrackingDisconnect;
+	private SendFactorThread mSendFactorThread;
+
+	Button btnFreeDisconnect;
 	String address = null;
 	TextView textViewStatus;
 	BluetoothAdapter myBluetoothAdapter = null;
 	BluetoothSocket btSocket = null;
 	InputStream inputStream = null;
+	DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
 	private class ConnectBT extends AsyncTask<Void, Void, Void> {
 		private boolean ConnectSuccess = true;
 
 		@Override
 		protected  void onPreExecute () {
-			progressDialog = ProgressDialog.show(TrackingActivity.this, "Connecting...", "Please Wait!!!");
+			progressDialog = ProgressDialog.show(FreeActivity.this, "Connecting...", "Please Wait!!!");
 		}
 
 		@Override
@@ -71,10 +74,13 @@ public class TrackingActivity extends Activity {
 				msg("Connected");
 				isBtConnected = true;
 				/* Initializing to stop. */
-				sendSignal(Protocol.T_STOP);
+				sendSignal(Protocol.F_STOP);
 				/* Start a new Thread, reading from HC-0x. */
 				mReceiveMessageThread = new ReceiveMessageThread(btSocket);
 				mReceiveMessageThread.start();
+				/* Start a new Thread, sending factors to HC-0x. */
+				mSendFactorThread = new SendFactorThread();
+				mSendFactorThread.start();
 			}
 			progressDialog.dismiss();
 		}
@@ -94,14 +100,14 @@ public class TrackingActivity extends Activity {
 				inputStream = btSocket.getInputStream();
 				// inputStreamReader = new InputStreamReader(inputStream);
 			} catch (IOException e) {
-				Log.d("TrackingActivity: ","Something's wrong when encapsulating InputStream.");
+				Log.d("FreeActivity: ","Something's wrong when encapsulating InputStream.");
 				e.printStackTrace();
 			}
 		}
 
 		@Override
 		public void run() {
-			Log.d("TrackingActivity: ", "mReceiveMessageThread started!");
+			Log.d("FreeActivity: ", "mReceiveMessageThread started!");
 			/* buffer for inputStream */
 			byte buffer[] = new byte[256];
 			int buffLength;
@@ -110,7 +116,7 @@ public class TrackingActivity extends Activity {
 			while (this.threadStatus == RUN) {
 				try {
 					if (inputStream.available() > 0) {
-						/* Wait until all bytes are received from HC-0x, you can modify 50 to larger number */					
+						/* Wait until all bytes are received from HC-0x, you can modify 50 to larger number */
 						/* to receive a longer bytes array. */
 						Thread.sleep(50);
 						/* Read from the InputStream */
@@ -124,17 +130,42 @@ public class TrackingActivity extends Activity {
 						}
 					}
 				} catch (IOException e) {
-					Log.d("TrackingActivity: ", "mReceiveMessageThread encountered IOException!");
+					Log.d("FreeActivity: ", "mReceiveMessageThread encountered IOException!");
 					e.printStackTrace();
 					threadStatus = KILL;
 					/* break is not necessary here but for better syntax accordance it was wrote. */
 					break;
 				} catch (InterruptedException e) {
-					Log.d("TrackingActivity: ", "mReceiveMessageThread encountered InterruptedException!");
+					Log.d("FreeActivity: ", "mReceiveMessageThread encountered InterruptedException!");
 					e.printStackTrace();
 					threadStatus = KILL;
 					break;
 				}
+			}
+		}
+	}
+
+	private class SendFactorThread extends Thread{
+		private final boolean RUN = true;
+		private final boolean KILL = false;
+		private float factorX = 0f;
+		private float factorY = 0f;
+		private String StrFactorX = "";
+		private String StrFactorY = "";
+		boolean threadStatus = RUN;
+
+		public void killThread() {
+			this.threadStatus = KILL;
+		}
+
+		@Override
+		public void run() {
+			while (this.threadStatus == RUN) {
+				factorX = Joystick.factorX;
+				factorY = Joystick.factorY;
+				StrFactorX = decimalFormat.format(factorX);
+				StrFactorY = decimalFormat.format(factorY);
+				sendSignal(Protocol.F_FACT + decimalFormat.format(Joystick.factorX) + "," + decimalFormat.format(Joystick.factorY));
 			}
 		}
 	}
@@ -148,14 +179,14 @@ public class TrackingActivity extends Activity {
 			for (int i = 0; i < buffLength; i++) {
 				c_buffer[i] = (char)(b_buffer[i] & 0xFF);
 			}
-			Log.d("TrackingActivity: ", "HC-0x said: " + new String(c_buffer, 0, msg.arg1));
+			Log.d("FreeActivity: ", "HC-0x said: " + new String(c_buffer, 0, msg.arg1));
 		}
 	};
 
 	private void msg (String s) {
 		Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
 	}
-	
+
 	private void sendSignal ( String cmd ) {
 		if ( btSocket != null ) {
 			try {
@@ -177,16 +208,18 @@ public class TrackingActivity extends Activity {
 		if ( btSocket != null ) {
 			try {
 				mReceiveMessageThread.killThread();
-				Log.d("TrackingActivity: ", "Thread killed.");
+				Log.d("FreeActivity: ", "mReceiveMessageThread killed.");
+				mSendFactorThread.killThread();
+				Log.d("FreeActivity: ", "mSendFactorThread killed.");
 				/* Stop before disconnect. */
-				sendSignal(Protocol.T_STOP);
+				sendSignal(Protocol.F_STOP);
 				/* inputStreamReader automatically close when inputStream closed. */
 				inputStream.close();
-				Log.d("TrackingActivity: ", "inputStream closed.");
+				Log.d("FreeActivity: ", "inputStream closed.");
 				btSocket.close();
-				Log.d("TrackingActivity: ", "btSocket closed.");
+				Log.d("FreeActivity: ", "btSocket closed.");
 			} catch(IOException e) {
-				Log.d("TrackingActivity: ", "Close Error.");
+				Log.d("FreeActivity: ", "Close Error.");
 				msg("Disconnect() Error");
 			}
 		}
@@ -196,29 +229,15 @@ public class TrackingActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_tracking);
-		
+		setContentView(R.layout.activity_free);
+
 		Intent intent = getIntent();
 		address = intent.getStringExtra(ModeActivity.EXTRA_ADDRESS);
-		
+
 		new ConnectBT().execute();
 
-		btnTrackingStart = findViewById(R.id.buttonTrackingStart);
-		btnTrackingStop = findViewById(R.id.buttonTrackingStop);
-		btnTrackingDisconnect = findViewById(R.id.buttonTrackingDisconnect);
-		btnTrackingStart.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				sendSignal(Protocol.T_STAR);
-			}
-		});
-		btnTrackingStop.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				sendSignal(Protocol.T_STOP);
-			}
-		});
-		btnTrackingDisconnect.setOnClickListener(new View.OnClickListener() {
+		btnFreeDisconnect = findViewById(R.id.buttonFreeDisconnect);
+		btnFreeDisconnect.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Disconnect();

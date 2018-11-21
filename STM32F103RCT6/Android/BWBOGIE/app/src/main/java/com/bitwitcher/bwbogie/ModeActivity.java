@@ -39,18 +39,18 @@ public class ModeActivity extends Activity {
 		btnAvoidance.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// Intent i = new Intent(ModeActivity.this, AvoidanceActivity.class);
-				// i.putExtra(EXTRA_ADDRESS, address);
-				// startActivity(i);
+				Intent intent = new Intent(ModeActivity.this, AvoidanceActivity.class);
+				intent.putExtra(EXTRA_ADDRESS, address);
+				startActivity(intent);
 			}
 		});
 
 		btnFree.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// Intent i = new Intent(ModeActivity.this, FreeActivity.class);
-				// i.putExtra(EXTRA_ADDRESS, address);
-				// startActivity(i);
+				Intent intent = new Intent(ModeActivity.this, FreeActivity.class);
+				intent.putExtra(EXTRA_ADDRESS, address);
+				startActivity(intent);
 			}
 		});
 	}
