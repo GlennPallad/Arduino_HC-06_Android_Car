@@ -9,3 +9,7 @@
 /build
 /captures
 .externalNativeBuild
+
+# Customized
+*.sublime-workspace
+*.sublime-project

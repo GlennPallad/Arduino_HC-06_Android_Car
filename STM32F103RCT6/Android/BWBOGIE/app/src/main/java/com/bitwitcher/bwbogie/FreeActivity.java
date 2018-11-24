@@ -165,7 +165,7 @@ public class FreeActivity extends Activity {
 				factorY = Joystick.factorY;
 				StrFactorX = decimalFormat.format(factorX);
 				StrFactorY = decimalFormat.format(factorY);
-				sendSignal(Protocol.F_FACT + decimalFormat.format(Joystick.factorX) + "," + decimalFormat.format(Joystick.factorY));
+				sendSignal(Protocol.F_FACT + StrFactorX + "," + StrFactorY);
 			}
 		}
 	}
