@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
 		deviceList = findViewById(R.id.deviceList);
 
 		myBluetooth = BluetoothAdapter.getDefaultAdapter();
-				if ( myBluetooth == null ) {
+		if ( myBluetooth == null ) {
 			Toast.makeText(getApplicationContext(), "Bluetooth device not available", Toast.LENGTH_LONG).show();
 			finish();
 		} else if ( !myBluetooth.isEnabled() ) {

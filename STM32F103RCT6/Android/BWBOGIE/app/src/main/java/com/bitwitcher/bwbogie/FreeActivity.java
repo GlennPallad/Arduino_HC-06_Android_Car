@@ -194,7 +194,7 @@ public class FreeActivity extends Activity {
 				/* Wait 50 millis ensure all bytes have been sent.
 						BluetoothSocket can be closed before all bytes were sent
 						if do not wait. */
-				Thread.sleep(50);
+				Thread.sleep(80);
 			} catch (IOException e) {
 				e.printStackTrace();
 				msg("sendSignal() Error");

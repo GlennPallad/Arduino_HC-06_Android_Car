@@ -1,0 +1,6 @@
+# Note
+This is the Android app for controlling BW-BOGIE.
+
+**This version is UNSTABLE!**
+
+**IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY.**
